@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "test": "vitest",
-    "test:run": "vitest run"
+    "test:run": "vitest run",
+    "test:endpoint": "tsx scripts/test-endpoint.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.98.0",
@@ -25,6 +26,7 @@
     "eslint": "^8",
     "eslint-config-next": "15.0.3",
     "tailwindcss": "^4.0.0-alpha.36",
+    "tsx": "^4.22.3",
     "typescript": "^5",
     "vitest": "^4.1.7"
   }
