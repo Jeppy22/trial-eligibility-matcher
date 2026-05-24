@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Clinical Trial Eligibility Matcher",
+  title: "Trial Eligibility Matcher",
   description:
-    "Match patient FHIR records against clinical trial eligibility criteria.",
+    "Match FHIR patient records against clinical trial eligibility criteria with reasoning and gap analysis. Built with Next.js, TypeScript, and Claude Sonnet 4.6.",
 };
 
 export default function RootLayout({

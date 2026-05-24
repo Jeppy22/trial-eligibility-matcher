@@ -124,6 +124,20 @@ criteriaText ─▶ parseCriteria ─▶ Criterion[] ─┐
 - **`lib/eligibility-engine/`** — For each criterion: gather evidence, ask Claude `met` / `not_met` / `needs_more_data` with citations, then aggregate into an `EligibilityVerdict`. One LLM call per criterion, sequential.
 - **`app/api/match/route.ts`** — Validates the request, runs the pipeline, returns the verdict.
 
+## Deploy
+
+The app is set up for Vercel.
+
+1. Push to GitHub, import the repo in Vercel.
+2. **Install Command**: set to `npm install --legacy-peer-deps` in **Project Settings → General → Build & Development Settings**. The Next 15 + React 19 RC peer-dep resolution fails on a plain `npm install`.
+3. **Environment Variables** (Project Settings → Environment Variables):
+   - `ANTHROPIC_API_KEY` — your Anthropic API key, scope: Production + Preview + Development.
+4. Trigger a deploy. The repo includes `vercel.json` which raises the `/api/match` function timeout to 60 seconds.
+
+> ⚠️ **Function-timeout caveat.** `vercel.json` requests `maxDuration: 60`, but **Vercel Hobby caps function execution at 10 seconds** regardless of the manifest. A full evaluation of the sample trial (~14 sequential LLM calls) takes 30–60s, so it will time out on Hobby. Use **Pro or higher** to get the full 60s. On Hobby, either upgrade or reduce the criteria count.
+
+The sample data lives at `public/sample-data/` and is committed; `npm run sync-samples` re-copies from `sample-data/` to `public/sample-data/` if you edit the source files (Linux/macOS — the build environment Vercel runs in).
+
 ## Scope (V1)
 
 **In:**
