@@ -1,2 +1,3 @@
-// Plain-text eligibility criteria → structured Criterion[]. Implemented later.
-export {};
+export { parseCriteria } from "./parser";
+export { SYSTEM_PROMPT, buildPrompt } from "./prompt";
+export { MODEL } from "./client";
