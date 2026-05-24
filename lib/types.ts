@@ -143,7 +143,7 @@ export interface Criterion {
   id: string;
   text: string;
   type: "inclusion" | "exclusion";
-  required_data: FHIRResourceType[];
+  requiredData: FHIRResourceType[];
 }
 
 export type MatchStatus = "met" | "not_met" | "needs_more_data";

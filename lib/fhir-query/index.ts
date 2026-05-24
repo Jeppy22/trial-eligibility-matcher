@@ -1,2 +1,15 @@
-// FHIR Bundle query helpers. Implemented in Pass 2.
-export {};
+export {
+  getPatient,
+  getConditions,
+  getObservations,
+  getMedicationRequests,
+  getProcedures,
+  getAge,
+  getGender,
+  hasActiveCondition,
+  getLatestObservation,
+  getObservationValue,
+  hasActiveMedication,
+  hasMedicationContaining,
+  daysSinceProcedure,
+} from "./queries";
