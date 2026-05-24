@@ -1,0 +1,18 @@
+Inclusion Criteria:
+
+- Male or female adults aged 45 to 75 years at the time of screening.
+- Documented diagnosis of type 2 diabetes mellitus for at least 6 months prior to screening.
+- HbA1c value between 6.5% and 8.5% (inclusive) at the most recent measurement within the last 90 days.
+- On a stable dose of metformin (>= 1000 mg/day) for at least 3 months prior to screening.
+- Systolic blood pressure < 160 mmHg and diastolic blood pressure < 100 mmHg at screening.
+- Able and willing to provide written informed consent and comply with study procedures.
+
+Exclusion Criteria:
+
+- History of myocardial infarction, stroke, or coronary revascularization within the past 12 months.
+- Type 1 diabetes mellitus or any history of diabetic ketoacidosis.
+- Estimated glomerular filtration rate (eGFR) less than 45 mL/min/1.73m^2.
+- Active malignancy or treatment for malignancy within the past 2 years (excluding non-melanoma skin cancer).
+- Current use of insulin, GLP-1 receptor agonists, or SGLT2 inhibitors.
+- Pregnancy, lactation, or planning to become pregnant during the study period.
+- Known hypersensitivity to the investigational product or any of its excipients.
