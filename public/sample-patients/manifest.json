@@ -1,5 +1,18 @@
 [
   {
+    "id": "demo-t2dm-match",
+    "displayName": "Margaret C. (demo)",
+    "age": 54,
+    "gender": "female",
+    "conditionCount": 1,
+    "observationCount": 2,
+    "medicationCount": 1,
+    "procedureCount": 0,
+    "topConditions": [
+      "Type 2 diabetes mellitus"
+    ]
+  },
+  {
     "id": "dea88da8-233f-5a49-2e2c-55a352c23027",
     "displayName": "Alejandro H.",
     "age": 25,

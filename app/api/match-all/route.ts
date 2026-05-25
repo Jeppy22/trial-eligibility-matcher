@@ -6,8 +6,8 @@ export const maxDuration = 300;
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
 
-const MAX_BUNDLE_ENTRIES = 500;
-const DEFAULT_MAX_TRIALS = 10;
+const MAX_BUNDLE_ENTRIES = 3000;
+const DEFAULT_MAX_TRIALS = 1;
 const HARD_MAX_TRIALS = 20;
 
 interface MatchAllRequestBody {

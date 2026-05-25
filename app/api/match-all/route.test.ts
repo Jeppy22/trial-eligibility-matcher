@@ -139,10 +139,10 @@ describe("POST /api/match-all — validation", () => {
     expect((await res.json()).error).toMatch(/Invalid FHIR bundle/);
   });
 
-  it("returns 413 when bundle.entry exceeds 500", async () => {
+  it("returns 413 when bundle.entry exceeds 3000", async () => {
     const bigBundle: FHIRBundle = {
       resourceType: "Bundle",
-      entry: Array.from({ length: 501 }, (_, i) => ({
+      entry: Array.from({ length: 3001 }, (_, i) => ({
         resource: { resourceType: "Patient" as const, id: `p${i}` },
       })),
     };
