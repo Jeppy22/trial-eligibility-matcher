@@ -162,3 +162,39 @@ export interface EligibilityVerdict {
   criteria_results: MatchResult[];
   gaps: string[];
 }
+
+// Multi-trial corpus + retrieval types.
+
+export type Trial = {
+  nctId: string;
+  title: string;
+  conditions: string[];
+  conditionCodes: string[];
+  phase: string;
+  sex: "ALL" | "MALE" | "FEMALE";
+  minimumAge: number | null;
+  maximumAge: number | null;
+  healthyVolunteers: boolean;
+  criteriaText: string;
+  focusArea: string;
+};
+
+export type RetrievalResult = {
+  trial: Trial;
+  score: number;
+  reasons: string[];
+  hardExcluded: boolean;
+  exclusionReason?: string;
+};
+
+export type PatientSummary = {
+  id: string;
+  displayName: string;
+  age: number;
+  gender: string;
+  conditionCount: number;
+  observationCount: number;
+  medicationCount: number;
+  procedureCount: number;
+  topConditions: string[];
+};

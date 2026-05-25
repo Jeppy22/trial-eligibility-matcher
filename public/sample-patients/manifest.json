@@ -1,0 +1,146 @@
+[
+  {
+    "id": "dea88da8-233f-5a49-2e2c-55a352c23027",
+    "displayName": "Alejandro H.",
+    "age": 25,
+    "gender": "male",
+    "conditionCount": 16,
+    "observationCount": 90,
+    "medicationCount": 3,
+    "procedureCount": 68,
+    "topConditions": [
+      "Medication review due (situation)",
+      "Received higher education (finding)",
+      "Transport problem (finding)"
+    ]
+  },
+  {
+    "id": "fe9e475f-c4f6-d535-4095-d29b04da4dde",
+    "displayName": "Benton H.",
+    "age": 7,
+    "gender": "male",
+    "conditionCount": 32,
+    "observationCount": 253,
+    "medicationCount": 23,
+    "procedureCount": 34,
+    "topConditions": [
+      "Atopic dermatitis (disorder)",
+      "Childhood asthma (disorder)",
+      "Perennial allergic rhinitis with seasonal variation (disorder)"
+    ]
+  },
+  {
+    "id": "0c58d1cb-d2c6-9148-d0b8-7cc9920886e9",
+    "displayName": "Ernie H.",
+    "age": 34,
+    "gender": "male",
+    "conditionCount": 33,
+    "observationCount": 86,
+    "medicationCount": 7,
+    "procedureCount": 88,
+    "topConditions": [
+      "Chronic pain (finding)",
+      "Chronic intractable migraine without aura (disorder)",
+      "Impacted molars (disorder)"
+    ]
+  },
+  {
+    "id": "de75adf2-bbf4-b6e2-7735-e41aa0628c46",
+    "displayName": "Jaunita F.",
+    "age": 40,
+    "gender": "female",
+    "conditionCount": 30,
+    "observationCount": 121,
+    "medicationCount": 8,
+    "procedureCount": 185,
+    "topConditions": [
+      "Recurrent urinary tract infection (disorder)",
+      "Educated to high school level (finding)",
+      "Full-time employment (finding)"
+    ]
+  },
+  {
+    "id": "c5117f5c-b201-f79b-d6e3-fe5c851fbfab",
+    "displayName": "Jinny S.",
+    "age": 59,
+    "gender": "female",
+    "conditionCount": 40,
+    "observationCount": 462,
+    "medicationCount": 17,
+    "procedureCount": 135,
+    "topConditions": [
+      "Recurrent urinary tract infection (disorder)",
+      "Received higher education (finding)",
+      "Lack of access to transportation (finding)"
+    ]
+  },
+  {
+    "id": "f0b9ae19-dcff-a83c-64a0-9525399278ee",
+    "displayName": "Jody K.",
+    "age": 32,
+    "gender": "male",
+    "conditionCount": 46,
+    "observationCount": 651,
+    "medicationCount": 66,
+    "procedureCount": 146,
+    "topConditions": [
+      "Risk activity involvement (finding)",
+      "Housing unsatisfactory (finding)",
+      "Educated to high school level (finding)"
+    ]
+  },
+  {
+    "id": "6d77cdcc-917e-b2de-bb22-93b24b9c58de",
+    "displayName": "Jospeh E.",
+    "age": 17,
+    "gender": "male",
+    "conditionCount": 12,
+    "observationCount": 119,
+    "medicationCount": 3,
+    "procedureCount": 65,
+    "topConditions": [
+      "Medication review due (situation)"
+    ]
+  },
+  {
+    "id": "d4f2710e-58cc-779e-70d1-7a4bf71fc1dc",
+    "displayName": "Juana M.",
+    "age": 20,
+    "gender": "female",
+    "conditionCount": 20,
+    "observationCount": 140,
+    "medicationCount": 6,
+    "procedureCount": 101,
+    "topConditions": [
+      "Educated to high school level (finding)",
+      "Full-time employment (finding)",
+      "Stress (finding)"
+    ]
+  },
+  {
+    "id": "891340da-2a15-6d5f-ac35-1766183991af",
+    "displayName": "Randy K.",
+    "age": 76,
+    "gender": "female",
+    "conditionCount": 37,
+    "observationCount": 578,
+    "medicationCount": 50,
+    "procedureCount": 117,
+    "topConditions": [
+      "Received higher education (finding)",
+      "Body mass index 30+ - obesity (finding)",
+      "Past pregnancy history of miscarriage (situation)"
+    ]
+  },
+  {
+    "id": "b6a41496-767f-18e8-02cf-f7881423d21a",
+    "displayName": "Twanna W.",
+    "age": 15,
+    "gender": "female",
+    "conditionCount": 8,
+    "observationCount": 117,
+    "medicationCount": 2,
+    "procedureCount": 54,
+    "topConditions": []
+  }
+]

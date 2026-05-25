@@ -88,6 +88,37 @@ curl -X POST http://localhost:3000/api/match \
 - `sample-data/patient-bundle.json` — Synthea-shaped FHIR R4 bundle for a 55-year-old male with hypertension, type 2 diabetes, HbA1c 7.2%, active metformin, and a colonoscopy two years ago.
 - `sample-data/trial-criteria.txt` — A T2DM / cardiovascular-prevention trial criteria block: 6 inclusion + 7 exclusion items in plain-text ClinicalTrials.gov format.
 
+## Data Setup
+
+Two one-time scripts populate the multi-trial corpus and the synthetic patient gallery. Neither is part of `npm run dev` — run them once after cloning, or whenever you want to refresh the data.
+
+### Ingest trials
+
+```sh
+npx tsx scripts/ingest-trials.ts
+```
+
+Fetches up to 20 recruiting interventional studies from ClinicalTrials.gov v2 for each of 5 focus areas (T2DM, hypertension, CAD, breast cancer screening, CKD), deduplicates by NCT ID, and writes `/data/trials.json`. **The output file is committed** (`.gitignore` excludes `/data/*` except `trials.json`) so deploys ship with the corpus and the app does not hit the API at request time.
+
+Polite to ClinicalTrials.gov: 500ms delay between requests, identifies itself in the User-Agent header.
+
+### Generate patients
+
+```sh
+# default jar path: C:\dev\fhir-ai\synthea\synthea-with-dependencies.jar
+npx tsx scripts/generate-patients.ts
+
+# or override:
+# PowerShell
+$env:SYNTHEA_JAR_PATH = "D:\path\to\synthea-with-dependencies.jar"; npx tsx scripts/generate-patients.ts
+# bash
+SYNTHEA_JAR_PATH=/path/to/synthea-with-dependencies.jar npx tsx scripts/generate-patients.ts
+```
+
+Runs Synthea to generate 10 Massachusetts patients into `./synthea-output/` (gitignored), copies each patient's FHIR Bundle to `/public/sample-patients/{id}.json`, and writes `/public/sample-patients/manifest.json` summarizing each one (age, gender, condition count, top 3 active conditions). Both the per-patient bundles and the manifest are committed.
+
+Requires Java on `PATH` and the Synthea fat jar (`synthea-with-dependencies.jar`) on disk.
+
 ## Tests
 
 ```sh
