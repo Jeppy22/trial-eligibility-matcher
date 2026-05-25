@@ -6,7 +6,7 @@ export const maxDuration = 60;
 export const dynamic = "force-dynamic";
 
 const MAX_CRITERIA_LENGTH = 10_000;
-const MAX_BUNDLE_ENTRIES = 500;
+const MAX_BUNDLE_ENTRIES = 3000;
 
 const VALIDATION_ERROR_PATTERNS =
   /validation|Criterion at index|Evaluator response|Failed to JSON\.parse|Expected first content block to be text|Expected JSON array at top level/i;
