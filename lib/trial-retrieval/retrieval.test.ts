@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
-import type { FHIRBundle, Trial } from "../types";
-import { filterTrialsForPatient, top } from "./index";
+import type { Condition, FHIRBundle, Trial } from "../types";
+import { filterTrialsForPatient, isClinicalCondition, top } from "./index";
 
 function makeTrial(overrides: Partial<Trial> = {}): Trial {
   return {
@@ -198,6 +198,81 @@ describe("filterTrialsForPatient — sort and edge cases", () => {
     });
     const [result] = filterTrialsForPatient(patient, [trial]);
     expect(result.score).toBe(4);
+    expect(result.reasons).toEqual([]);
+  });
+});
+
+describe("isClinicalCondition", () => {
+  function makeCondition(text?: string, display?: string): Condition {
+    return {
+      resourceType: "Condition",
+      id: "c0",
+      clinicalStatus: { coding: [{ code: "active" }] },
+      code: {
+        text,
+        coding: display ? [{ code: "X", display }] : undefined,
+      },
+      subject: { reference: "Patient/p1" },
+    };
+  }
+
+  it("returns false for Synthea administrative findings/situations", () => {
+    expect(
+      isClinicalCondition(makeCondition("Medication review due (situation)")),
+    ).toBe(false);
+    expect(
+      isClinicalCondition(makeCondition("Received higher education (finding)")),
+    ).toBe(false);
+    expect(isClinicalCondition(makeCondition("Transport problem"))).toBe(false);
+    expect(isClinicalCondition(makeCondition("Stress (finding)"))).toBe(false);
+    expect(
+      isClinicalCondition(makeCondition(undefined, "Full-time employment")),
+    ).toBe(false);
+  });
+
+  it("returns true for real clinical diagnoses", () => {
+    expect(
+      isClinicalCondition(makeCondition("Type 2 diabetes mellitus")),
+    ).toBe(true);
+    expect(isClinicalCondition(makeCondition("Hypertension"))).toBe(true);
+    expect(
+      isClinicalCondition(
+        makeCondition("Essential hypertension (disorder)"),
+      ),
+    ).toBe(true);
+  });
+
+  it("does not score administrative conditions in retrieval", () => {
+    const patient: FHIRBundle = {
+      resourceType: "Bundle",
+      entry: [
+        {
+          resource: {
+            resourceType: "Patient",
+            id: "p1",
+            gender: "male",
+            birthDate: BIRTH_AGE_40,
+          },
+        },
+        {
+          resource: {
+            resourceType: "Condition",
+            id: "c1",
+            clinicalStatus: { coding: [{ code: "active" }] },
+            code: { text: "Medication review due (situation)" },
+            subject: { reference: "Patient/p1" },
+          },
+        },
+      ],
+    };
+    // Trial whose "conditions" entry contains the administrative string —
+    // it should NOT be matched.
+    const trial = makeTrial({
+      conditions: ["Medication review due (situation)"],
+    });
+    const [result] = filterTrialsForPatient(patient, [trial]);
+    expect(result.hardExcluded).toBe(false);
+    expect(result.score).toBe(0);
     expect(result.reasons).toEqual([]);
   });
 });

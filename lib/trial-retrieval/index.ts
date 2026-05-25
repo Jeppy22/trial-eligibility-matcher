@@ -29,7 +29,39 @@ function conditionNames(condition: Condition): string[] {
   return out;
 }
 
-function sexMatches(trialSex: Trial["sex"], gender: string | null): boolean {
+// Synthea generates many social/administrative "conditions" that aren't
+// clinical diagnoses — strip them so they don't pollute retrieval scoring
+// or the manifest's topConditions list.
+const ADMINISTRATIVE_PATTERNS: RegExp[] = [
+  /^medication review/i,
+  /^received .* education/i,
+  /^transport problem/i,
+  /^full-time employment/i,
+  /^part-time employment/i,
+  /^limited social contact/i,
+  /^unemployment/i,
+  /^stress/i,
+  /^social isolation/i,
+];
+
+function isAdministrativeName(name: string): boolean {
+  const trimmed = name.trim();
+  if (!trimmed) return false;
+  const lower = trimmed.toLowerCase();
+  if (lower.endsWith("(situation)") || lower.endsWith("(finding)")) return true;
+  return ADMINISTRATIVE_PATTERNS.some((re) => re.test(trimmed));
+}
+
+export function isClinicalCondition(condition: Condition): boolean {
+  const names = conditionNames(condition);
+  if (names.length === 0) return true;
+  return !names.some(isAdministrativeName);
+}
+
+function sexMatches(
+  trialSex: Trial["sex"],
+  gender: string | null | undefined,
+): boolean {
   if (trialSex === "ALL") return true;
   if (!gender) return true;
   return trialSex.toLowerCase() === gender.toLowerCase();
@@ -38,7 +70,7 @@ function sexMatches(trialSex: Trial["sex"], gender: string | null): boolean {
 function evaluateTrial(
   trial: Trial,
   age: number | null,
-  gender: string | null,
+  gender: string | null | undefined,
   patientConditionTexts: string[],
 ): RetrievalResult {
   if (!sexMatches(trial.sex, gender)) {
@@ -104,6 +136,7 @@ export function filterTrialsForPatient(
   const gender = getGender(bundle);
   const patientConditionTexts: string[] = [];
   for (const c of getConditions(bundle)) {
+    if (!isClinicalCondition(c)) continue;
     patientConditionTexts.push(...conditionNames(c));
   }
 

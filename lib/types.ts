@@ -198,3 +198,26 @@ export type PatientSummary = {
   procedureCount: number;
   topConditions: string[];
 };
+
+export type TrialEvaluation = {
+  trial: Trial;
+  retrievalScore: number;
+  retrievalReasons: string[];
+  verdict: EligibilityVerdict | null;
+  error?: string;
+};
+
+export type MultiTrialResult = {
+  evaluations: TrialEvaluation[];
+  hardExcluded: RetrievalResult[];
+  summary: {
+    totalConsidered: number;
+    evaluated: number;
+    eligible: number;
+    ineligible: number;
+    needsMoreData: number;
+    errors: number;
+    hardExcluded: number;
+  };
+  totalDurationMs: number;
+};

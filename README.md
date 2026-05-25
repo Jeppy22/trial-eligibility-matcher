@@ -28,6 +28,28 @@ npm run test:endpoint
 
 You should see a `200` response with an `EligibilityVerdict` JSON body.
 
+## Multi-trial matching (headline flow)
+
+Pick (or upload) a patient, hit "Match against all trials," and the app:
+
+1. **Retrieval** runs against `/data/trials.json` (89 trials from 5 focus areas) — a deterministic TypeScript scorer hard-excludes by sex/age and ranks the rest by condition-string overlap, phase, and healthy-volunteer flag. Costs nothing; takes a few ms.
+2. **Evaluation** sends the top 10 candidates through the existing single-trial pipeline (parse criteria → grade per criterion with cited evidence), in parallel up to concurrency 3.
+3. **Stream** Server-Sent Events back to the browser: a `retrieval` summary up front, a `trial-complete` event per finished trial, `progress` heartbeats, and a final `done` payload.
+
+Results bucket into **Eligible**, **Needs more data**, **Ineligible**, and **Not assessed** (the hard-excluded set, surfaced for transparency).
+
+### `POST /api/match-all`
+
+Body: `{ "bundle": FHIRBundle, "maxTrials"?: number /* 1..20, default 10 */ }`. Returns `text/event-stream`.
+
+### Cost and runtime
+
+Per match-all run, with maxTrials=10, the LLM does **1 parse + N criteria calls** per trial — roughly 10–20 Sonnet 4.6 calls per trial. Realistic total: **$1.00–$2.00 and 60–150 seconds** depending on criteria density.
+
+### Vercel plan caveat
+
+`vercel.json` sets `maxDuration: 300` for `/api/match-all`, but **Vercel Hobby caps function execution at 10 seconds** — this endpoint will fail on Hobby. Use **Pro or higher** (300s) for the full multi-trial flow. The single-trial `/api/match` endpoint also fails on Hobby for typical criteria sets; see below.
+
 ## API contract
 
 ### `POST /api/match`

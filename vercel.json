@@ -2,6 +2,9 @@
   "functions": {
     "app/api/match/route.ts": {
       "maxDuration": 60
+    },
+    "app/api/match-all/route.ts": {
+      "maxDuration": 300
     }
   }
 }
