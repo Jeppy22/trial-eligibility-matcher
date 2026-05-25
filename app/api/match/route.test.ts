@@ -138,10 +138,10 @@ describe("POST /api/match — validation", () => {
     expect(body.error).toMatch(/exceeds maximum length of 10000/);
   });
 
-  it("returns 413 when bundle.entry exceeds 500 items", async () => {
+  it("returns 413 when bundle.entry exceeds 3000 items", async () => {
     const bigBundle: FHIRBundle = {
       resourceType: "Bundle",
-      entry: Array.from({ length: 501 }, (_, i) => ({
+      entry: Array.from({ length: 3001 }, (_, i) => ({
         resource: {
           resourceType: "Patient" as const,
           id: `p${i}`,
@@ -153,7 +153,7 @@ describe("POST /api/match — validation", () => {
     );
     expect(res.status).toBe(413);
     const body = await res.json();
-    expect(body.error).toMatch(/maximum size of 500 entries/);
+    expect(body.error).toMatch(/maximum size of 3000 entries/);
   });
 });
 
