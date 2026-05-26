@@ -1,10 +1,7 @@
 {
+  "installCommand": "npm install --legacy-peer-deps",
   "functions": {
-    "app/api/match/route.ts": {
-      "maxDuration": 60
-    },
-    "app/api/match-all/route.ts": {
-      "maxDuration": 300
-    }
+    "app/api/match/route.ts": { "maxDuration": 60 },
+    "app/api/match-all/route.ts": { "maxDuration": 300 }
   }
 }
